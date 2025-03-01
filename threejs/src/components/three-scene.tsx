@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import {useRef, useState} from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import type { Mesh } from "three"
@@ -8,6 +8,9 @@ import type { Mesh } from "three"
 function Cube(props: { position: [number, number, number] }) {
     // This reference gives us direct access to the THREE.Mesh object
     const meshRef = useRef<Mesh>(null!)
+
+    const [hovered, setHover] = useState(false)
+
 
     // rotate the cube every frame
     useFrame((state, delta) => {
@@ -19,9 +22,11 @@ function Cube(props: { position: [number, number, number] }) {
         <mesh
             {...props}
             ref={meshRef}
+            onPointerOver={() => setHover(true)}
+            onPointerOut={() => setHover(false)}
         >
             <boxGeometry args={[1, 1, 1]}/>
-            <meshStandardMaterial color={"blue"}/>
+            <meshStandardMaterial color={hovered ? "hotpink" : "orange"}/>
         </mesh>
     )
 }
@@ -31,7 +36,9 @@ function Sphere(props: { position: [number, number, number] }) {
     // This reference gives us direct access to the THREE.Mesh object
     const meshRef = useRef<Mesh>(null!)
 
-    // rotate the bol every frame
+    const [active, setActive] = useState(false)
+
+    //rotate the sphere every frame
     useFrame((state, delta) => {
         meshRef.current.rotation.x -= delta * 0.1
         meshRef.current.rotation.y -= delta * 0.15
@@ -41,9 +48,11 @@ function Sphere(props: { position: [number, number, number] }) {
         <mesh
             {...props}
             ref={meshRef}
+            scale={active ? 1.2 : 1}
+            onClick={() => setActive(!active)}
         >
             <sphereGeometry args={[0.75, 32, 32]} />
-            <meshStandardMaterial color="red"/>
+            <meshStandardMaterial color="lightblue"/>
         </mesh>
     )
 }
