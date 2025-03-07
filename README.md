@@ -7,4 +7,5 @@ https://laurien-hart-hybrid-topic.vercel.app/
 Als je benieuwd bent naar mijn eindopdracht kan je de volgende link raadplegen
 
 PS: geef het even tijd om in te laden (het zijn wel wat planeten)
+
 https://laurien-hart-eindopdracht-hybrid.vercel.app/
